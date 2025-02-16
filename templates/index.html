@@ -1,0 +1,378 @@
+<!--Semana 5 Curso Visión por Computador - Especialización en inteligencia Artificial-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>.::Semana 5  - UNIMINUTO::.</title>
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --light-blue: #e8f0fe;
+            --hover-blue: #1557b0;
+            --border-blue: #4285f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: left;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .course-info {
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+
+        .course-title {
+            color: var(--primary-blue);
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .course-details {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        .logo-container {
+            width: 150px;
+            height: 90px;
+            background-color: var(--light-blue);
+            border: 2px dashed var(--border-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 0.20em;
+            text-align: center;
+            padding: 7px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        #imagePreview {
+            max-width: 280px;
+            max-height: 280px;
+            margin: 20px auto;
+            border: 3px solid var(--border-blue);
+            border-radius: 10px;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        #imagePreview:hover {
+            transform: scale(1.02);
+        }
+
+        .upload-container {
+            margin: 20px 0;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 25px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .custom-file-upload:hover {
+            background-color: var(--hover-blue);
+        }
+
+        button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        button:hover:not([disabled]) {
+            background-color: var(--hover-blue);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #result {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--light-blue);
+            border-radius: 10px;
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .prediction {
+            font-size: 2em;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .confidence {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .error {
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+    
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+    
+        .footer-title {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    
+        .footer-text {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+    
+        .footer-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    
+        .footer-links a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    
+        .footer-links a:hover {
+            color: var(--hover-blue);
+        }
+    
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="course-info">
+            <div class="course-title">Semana 5</div>
+            <div class="course-details">
+                Curso Visión por Computador<br>
+                Especialización en Inteligencia Artificial 2025
+            </div>
+        </div>
+        <div class="logo-container">
+            <img src="data:image/jpeg;base64,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" alt="Logo" style="max-width: 100%; height: auto;"/>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Reconocer Dígitos DataSet MNIST</h1>
+        <p>Adjuntar una imagen de un numero para comenzar el reconocimiento</p>
+        
+        <div class="upload-container">
+            <label for="imageInput" class="custom-file-upload">
+                📁 Seleccionar Imagen
+            </label>
+            <input type="file" id="imageInput" accept="image/*" onchange="handleImageUpload(event)">
+        </div>
+
+        <img id="imagePreview">
+        
+        <div>
+            <button onclick="predecirDigitos()" id="predictButton" disabled>
+                🔍 Predecir Dígito
+            </button>
+        </div>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const imagePreview = document.getElementById('imagePreview');
+        const predictButton = document.getElementById('predictButton');
+        let currentImage = null;
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    currentImage = e.target.result;
+                    predictButton.disabled = false;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function predecirDigitos() {
+            if (!currentImage) return;
+            
+            document.getElementById('result').innerHTML = 
+                '<div class="prediction">Analizando...</div>';
+            
+            fetch('/predecir', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    imagen: currentImage
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.exito) {
+                    let resultHTML = `
+                        <div class="total-digits">
+                            Total de dígitos encontrados: ${data.total_digitos}
+                        </div>
+                        <div class="digit-container">
+                    `;
+                    
+                    data.resultados.forEach(resultado => {
+                        resultHTML += `
+                            <div class="digit-card">
+                                <div class="digit-number">${resultado.digito}</div>
+                                <div class="digit-confidence">
+                                    Confianza: ${(resultado.confianza * 100).toFixed(2)}%
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    resultHTML += '</div>';
+                    document.getElementById('result').innerHTML = resultHTML;
+                } else {
+                    document.getElementById('result').innerHTML =
+                        `<div class="error">Error: ${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                document.getElementById('result').innerHTML =
+                    `<div class="error">Error de conexión: ${error}</div>`;
+            });
+        }
+    </script>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-title">Acerca del Proyecto</div>
+                <div class="footer-text">
+                    Reconocimiento de dígitos usando el dataset MNIST
+                    y técnicas de visión por computador.
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title">Creador por</div>
+                <div class="footer-text">
+                   <p> Daniel Alejandro Vargas Figueredo</p>
+                   <p> German Giovanni Lopez Santos</p>
+                    <br>
+              
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title">Enlaces</div>
+                <div class="footer-links">
+                   
+                    <a href="#">Repositorio Github</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Especialización en Inteligencia Artificial - UNIMINUTO
+        </div>
+    </footer>
+</body>
+</html>
