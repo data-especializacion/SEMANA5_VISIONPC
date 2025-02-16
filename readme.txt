@@ -8,6 +8,6 @@ Aplicativo Flask identifición digitos modelo entrenado con el dataset MNIST
 
 UNIMINUTO 2025
 
-Daniel Vargas F
+DVF
 
 =================================================================================
